@@ -50,15 +50,21 @@ export function GameBoardFactory() {
         initializeShips();
     }()
 
+
     let hitCord = function (x, y) {
-        if (board[x][y]) {
-            board[x][y] = false;
+        if (board[x][y] != 0) {
+            if (board[x][y] === true) {
+                board[x][y] = 0;
+            } else {
+                ships[board[x][y]].ship.hitCount++;
+                board[x][y] = 0;
+            }
             return true;
         } else {
             return false;
         }
     }
 
-    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard };
+    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships };
 
 }

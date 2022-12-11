@@ -1,4 +1,5 @@
 import { GameBoardFactory } from "./gameBoardFactory"
+import { shipFactory } from "./shipFactory";
 let board = [];
 function clearBoard() {
     for (let i = 0; i < 10; i++) {
@@ -45,6 +46,11 @@ test("checkBoard game not over", () => {
 
 test("checkBoard game over", () => {
     let gameBoard1 = new GameBoardFactory();
+    for (let i = 0; i < 10; i++) {
+        for (let j = 0; j < 10; j++) {
+            gameBoard1.board[i][j] = 0;
+        }
+    }
     expect(gameBoard1.checkBoard()).toEqual(true);
 });
 
@@ -65,4 +71,18 @@ test("hitCords hit fail", () => {
     let gameBoard1 = new GameBoardFactory();
     clearBoard();
     expect(gameBoard1.hitCord(0, 0)).toEqual(false);
+});
+
+test("hitCords hit ship", () => {
+    let gameBoard1 = new GameBoardFactory();
+    clearBoard();
+    gameBoard1.createShip(2, 0, 0, "y-axis")
+    expect(gameBoard1.hitCord(0, 0)).toEqual(true);
+});
+
+test("hitCords hit missed", () => {
+    let gameBoard1 = new GameBoardFactory();
+    clearBoard();
+    gameBoard1.createShip(2, 0, 0, "y-axis")
+    expect(gameBoard1.hitCord(1, 1)).toEqual(false);
 });
