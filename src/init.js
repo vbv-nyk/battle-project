@@ -1,14 +1,4 @@
-import { shipFactory } from "./shipFactory";
-let ships = [];
+import { GameBoardFactory } from "./gameBoardFactory";
 
-function loadShips() {
-    let count = 2;
-    while (count <= 5) {
-        ships[count] = new shipFactory(count);
-        count++;
-    }
-}
-
-export let loadGame = function () {
-    loadShips();
-}(); 
+let gameboard1 = new GameBoardFactory();
+let gameboard2 = new GameBoardFactory();
