@@ -1,11 +1,14 @@
 import { shipFactory } from "./shipFactory";
+let ships = [];
 
-export let loadGame = function () {
+function loadShips() {
     let count = 2;
-    let ship = [];
     while (count <= 5) {
-        ship[count] = new shipFactory(count);
-        console.log(ship[count]);
+        ships[count] = new shipFactory(count);
         count++;
     }
+}
+
+export let loadGame = function () {
+    loadShips();
 }(); 

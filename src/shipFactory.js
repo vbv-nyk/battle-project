@@ -4,5 +4,13 @@ export function shipFactory(count) {
 		isSunk: false,
 		length: count,
 	};
-	return ship;
+
+	const hit = function () {
+		ship.hitCount++;
+		if (ship.hitCount == ship.length) {
+			ship.isSunk = true;
+		}
+	}
+
+	return { ship, hit };
 }
