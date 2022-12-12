@@ -1,3 +1,5 @@
+import { gameboard1, gameboard2 } from "./init";
+
 function playerPlays(gameboard2) {
     if (gameboard2.checkBoard()) {
         return 3;
@@ -21,7 +23,7 @@ function computerPlays(gameboard1) {
     }
 }
 
-export function playGame(gameboard1, gameboard2) {
+export function playGame() {
     let turn = 1;
     while (turn != 3) {
         if (turn == 1) {
@@ -30,4 +32,5 @@ export function playGame(gameboard1, gameboard2) {
             turn = computerPlays(gameboard1);
         }
     }
+    return { turn };
 }

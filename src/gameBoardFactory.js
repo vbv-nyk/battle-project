@@ -1,5 +1,4 @@
 import { shipFactory } from "./shipFactory";
-
 export function GameBoardFactory() {
     let count = 2;
     let ships = [];
@@ -15,7 +14,7 @@ export function GameBoardFactory() {
         return board;
     };
 
-    function createShip(x, y, axis) {
+    function createShip(x, y, axis, e) {
         ships[count] = new shipFactory(count);
         if (x > 9 || y > 9)
             return false;
@@ -27,8 +26,11 @@ export function GameBoardFactory() {
                     return false;
                 }
             }
-            for (let i = y; i < y + count; i++)
+            for (let i = y; i < y + count; i++) {
                 board[x][i] = count;
+                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - y)}"]`)
+                curBox.textContent = count;
+            }
             count++;
         } else {
             if (x + count > 10) return false;
@@ -37,8 +39,11 @@ export function GameBoardFactory() {
                     return false;
                 }
             }
-            for (let i = x; i < x + count; i++)
+            for (let i = x; i < x + count; i++) {
                 board[i][y] = count;
+                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - x)}"]`)
+                curBox.textContent = count;
+            }
             count++;
         }
         return board;
@@ -63,17 +68,23 @@ export function GameBoardFactory() {
     }()
 
 
-    let hitCord = function (x, y) {
-        if (board[x][y] != 0) {
-            if (board[x][y] === true) {
-                board[x][y] = 0;
+    function hitCord(x, y, e) {
+        if (count == 6) {
+            if (board[x][y] !== 0) {
+                if (board[x][y] == false) {
+                    board[x][y] = 0;
+                    e.target.textContent = "0";
+                } else {
+                    ships[board[x][y]].hit();
+                    board[x][y] = 0;
+                    e.target.textContent = "0";
+                }
+                return true;
             } else {
-                ships[board[x][y]].ship.hitCount++;
-                board[x][y] = 0;
+                return false;
             }
-            return true;
         } else {
-            return false;
+            createShip(x, y, "x-axis", e);
         }
     }
 

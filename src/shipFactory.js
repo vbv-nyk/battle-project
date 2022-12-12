@@ -10,6 +10,7 @@ export function shipFactory(count) {
 		if (ship.hitCount == ship.length) {
 			ship.isSunk = true;
 		}
+		return { ship, hit };
 	}
 
 	return { ship, hit };
