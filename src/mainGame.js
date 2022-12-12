@@ -1,5 +1,5 @@
 function playerPlays(gameboard2) {
-    if (gameboard2.checkGame()) {
+    if (gameboard2.checkBoard()) {
         return 3;
     } else {
         return 0;
@@ -10,9 +10,8 @@ function computerPlays(gameboard1) {
     for (let i = 0; i < 10; i++) {
         for (let j = 0; j < 10; j++) {
             if (gameboard1.board[i][j]) {
-                +``
                 gameboard1.hitCord(i, j);
-                if (gameboard1.checkGame()) {
+                if (gameboard1.checkBoard()) {
                     return 3;
                 } else {
                     return 1;
