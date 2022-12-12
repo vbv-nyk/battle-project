@@ -78,7 +78,7 @@ export function GameBoardFactory() {
                 } else {
                     ships[board[x][y]].hit();
                     board[x][y] = 0;
-                    e.target.textContent = "0";
+                    e.target.textContent = "X";
                 }
                 return true;
             } else {
