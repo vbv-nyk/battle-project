@@ -1,4 +1,5 @@
 import { shipFactory } from "./shipFactory";
+const axis = document.querySelector(".axis");
 export function GameBoardFactory() {
     let count = 2;
     let ships = [];
@@ -41,7 +42,7 @@ export function GameBoardFactory() {
             }
             for (let i = x; i < x + count; i++) {
                 board[i][y] = count;
-                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - x)}"]`)
+                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - x) * 10}"]`)
                 curBox.textContent = count;
             }
             count++;
@@ -84,7 +85,7 @@ export function GameBoardFactory() {
                 return false;
             }
         } else {
-            createShip(x, y, "x-axis", e);
+            createShip(x, y, axis.textContent, e);
         }
     }
 

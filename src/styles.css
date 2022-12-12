@@ -42,3 +42,11 @@ body {
     font-size: 20px;
     color: white;
 }
+
+.axis {
+    padding: 5px;
+    font-size: large;
+    background-color: transparent;
+    color: white;
+    border: none;
+}

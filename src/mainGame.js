@@ -1,5 +1,13 @@
 import { gameboard1, gameboard2 } from "./init";
+const axis = document.querySelector(".axis");
 
+axis.addEventListener("click", () => {
+    if (axis.textContent = "x-axis") {
+        axis.textContent = "y-axis";
+    } else {
+        axis.textContent = "x-axis";
+    }
+})
 function playerPlays(gameboard2) {
     if (gameboard2.checkBoard()) {
         return 3;
