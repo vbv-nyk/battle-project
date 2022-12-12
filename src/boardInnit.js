@@ -9,6 +9,9 @@ function createBoard(num) {
         for (let j = 0; j < 10; j++) {
             const box = document.createElement("div");
             box.classList.add("board-item");
+            box.addEventListener("click", () => {
+
+            });
             boardContainer.append(box);
         }
     }

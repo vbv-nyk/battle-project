@@ -15,19 +15,31 @@ export function GameBoardFactory() {
         return board;
     };
 
-    function createShip(length, x, y, axis) {
-        ships[length] = new shipFactory(length);
+    function createShip(x, y, axis) {
+        ships[count] = new shipFactory(count);
         if (x > 9 || y > 9)
             return false;
 
         if (axis == "x-axis") {
-            if (y + length > 10) return false;
-            for (let i = y; i < y + length; i++)
-                board[x][i] = length;
+            if (y + count > 10) return false;
+            for (let i = y; i < y + count; i++) {
+                if (board[x][i] >= 1) {
+                    return false;
+                }
+            }
+            for (let i = y; i < y + count; i++)
+                board[x][i] = count;
+            count++;
         } else {
-            if (x + length > 10) return false;
-            for (let i = x; i < x + length; i++)
-                board[i][y] = length;
+            if (x + count > 10) return false;
+            for (let i = x; i < x + count; i++) {
+                if (board[i][y] >= 1) {
+                    return false;
+                }
+            }
+            for (let i = x; i < x + count; i++)
+                board[i][y] = count;
+            count++;
         }
         return board;
     }
