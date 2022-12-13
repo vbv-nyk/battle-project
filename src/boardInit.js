@@ -12,9 +12,10 @@ function createBoard(num) {
         for (let j = 0; j < 10; j++) {
             const box = document.createElement("div");
             box.classList.add("board-item");
+            box.classList.add(`board-${num}`);
             box.setAttribute("data-num", cur);
             box.addEventListener("click", (e) => {
-                if (playGame.turn === 1) {
+                if (num === 1) {
                     gameboard1.hitCord(i, j, e.target.dataset.num);
                 } else {
                     gameboard2.hitCord(i, j, e.target.dataset.num);

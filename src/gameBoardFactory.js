@@ -1,6 +1,6 @@
 import { shipFactory } from "./shipFactory";
 const axis = document.querySelector(".axis");
-export function GameBoardFactory() {
+export function GameBoardFactory(name) {
     let count = 2;
     let ships = [];
     let board = [];
@@ -29,7 +29,7 @@ export function GameBoardFactory() {
             }
             for (let i = y; i < y + count; i++) {
                 board[x][i] = count;
-                const curBox = document.querySelector(`.board-item[data-num="${Number(dataNum) + (i - y)}"]`)
+                const curBox = document.querySelector(`.board-${name}.board-item[data-num="${Number(dataNum) + (i - y)}"]`)
                 curBox.textContent = count;
             }
             count++;
@@ -42,12 +42,12 @@ export function GameBoardFactory() {
             }
             for (let i = x; i < x + count; i++) {
                 board[i][y] = count;
-                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - x) * 10}"]`)
+                const curBox = document.querySelector(`.board-${name}.board-item[data-num="${Number(dataNum) + (i - x) * 10}"]`)
                 curBox.textContent = count;
             }
             count++;
         }
-        return board;
+        return true;
     }
 
     function checkBoard() {
@@ -70,7 +70,7 @@ export function GameBoardFactory() {
 
 
     function hitCord(x, y, dataNum) {
-        const chosenBoardItem = document.querySelector(`.board-item[data-num="${dataNum}"]`)
+        const chosenBoardItem = document.querySelector(`.board-${name}.board-item[data-num="${dataNum}"]`)
         if (count == 6) {
             if (board[x][y] !== 0) {
                 if (board[x][y] == false) {
@@ -86,10 +86,10 @@ export function GameBoardFactory() {
                 return false;
             }
         } else {
-            createShip(x, y, axis.textContent, dataNum);
+            return createShip(x, y, axis.textContent, dataNum);
         }
     }
 
-    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships };
+    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships, name };
 
 }
