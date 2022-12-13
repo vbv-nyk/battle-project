@@ -1,10 +1,11 @@
+import { updateCurrentPlayer } from "./mainGame";
 import { shipFactory } from "./shipFactory";
 const axis = document.querySelector(".axis");
 export function GameBoardFactory(name) {
     let count = 2;
     let ships = [];
     let board = [];
-
+    let enabled = true;
     function clearBoard() {
         for (let i = 0; i < 10; i++) {
             board[i] = [];
@@ -71,7 +72,10 @@ export function GameBoardFactory(name) {
 
     function hitCord(x, y, dataNum) {
         const chosenBoardItem = document.querySelector(`.board-${name}.board-item[data-num="${dataNum}"]`)
-        if (count == 6) {
+        if (count > 5) {
+            if (this.enabled == false) {
+                return false;
+            }
             if (board[x][y] !== 0) {
                 if (board[x][y] == false) {
                     board[x][y] = 0;
@@ -81,6 +85,7 @@ export function GameBoardFactory(name) {
                     board[x][y] = 0;
                     chosenBoardItem.textContent = "X";
                 }
+                updateCurrentPlayer();
                 return true;
             } else {
                 return false;
@@ -90,6 +95,6 @@ export function GameBoardFactory(name) {
         }
     }
 
-    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships, name };
+    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships, name, enabled, count };
 
 }

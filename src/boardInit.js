@@ -1,5 +1,4 @@
 import { gameboard1, gameboard2 } from './init';
-import { playGame } from './mainGame';
 import './styles.css';
 const body = document.querySelector("body");
 const boardsContainer = document.querySelector(".boards-container");
@@ -17,7 +16,7 @@ function createBoard(num) {
             box.addEventListener("click", (e) => {
                 if (num === 1) {
                     gameboard1.hitCord(i, j, e.target.dataset.num);
-                } else {
+                } else if (num === 2) {
                     gameboard2.hitCord(i, j, e.target.dataset.num);
                 }
             });
