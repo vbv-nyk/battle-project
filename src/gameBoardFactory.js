@@ -15,7 +15,7 @@ export function GameBoardFactory() {
         return board;
     };
 
-    function createShip(x, y, axis, e) {
+    function createShip(x, y, axis, dataNum) {
         ships[count] = new shipFactory(count);
         if (x > 9 || y > 9)
             return false;
@@ -29,7 +29,7 @@ export function GameBoardFactory() {
             }
             for (let i = y; i < y + count; i++) {
                 board[x][i] = count;
-                const curBox = document.querySelector(`.board-item[data-num="${Number(e.target.dataset.num) + (i - y)}"]`)
+                const curBox = document.querySelector(`.board-item[data-num="${Number(dataNum) + (i - y)}"]`)
                 curBox.textContent = count;
             }
             count++;
@@ -69,23 +69,24 @@ export function GameBoardFactory() {
     }()
 
 
-    function hitCord(x, y, e) {
+    function hitCord(x, y, dataNum) {
+        const chosenBoardItem = document.querySelector(`.board-item[data-num="${dataNum}"]`)
         if (count == 6) {
             if (board[x][y] !== 0) {
                 if (board[x][y] == false) {
                     board[x][y] = 0;
-                    e.target.textContent = "0";
+                    chosenBoardItem.textContent = "0";
                 } else {
                     ships[board[x][y]].hit();
                     board[x][y] = 0;
-                    e.target.textContent = "X";
+                    chosenBoardItem.textContent = "X";
                 }
                 return true;
             } else {
                 return false;
             }
         } else {
-            createShip(x, y, axis.textContent, e);
+            createShip(x, y, axis.textContent, dataNum);
         }
     }
 

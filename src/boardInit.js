@@ -15,9 +15,9 @@ function createBoard(num) {
             box.setAttribute("data-num", cur);
             box.addEventListener("click", (e) => {
                 if (playGame.turn === 1) {
-                    gameboard1.hitCord(i, j, e);
+                    gameboard1.hitCord(i, j, e.target.dataset.num);
                 } else {
-                    gameboard2.hitCord(i, j, e);
+                    gameboard2.hitCord(i, j, e.target.dataset.num);
                 }
             });
             boardContainer.append(box);
