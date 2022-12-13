@@ -18,4 +18,5 @@ let gameboard1 = new GameBoardFactory(1);
 let gameboard2 = new GameBoardFactory(2);
 
 computer();
+axis.textContent = "x-axis";
 export { gameboard1, gameboard2 };
