@@ -2,7 +2,7 @@ import { gameboard1, gameboard2 } from './init';
 import { playGame } from './mainGame';
 import './styles.css';
 const body = document.querySelector("body");
-const boardsContainer = document.createElement("div");
+const boardsContainer = document.querySelector(".boards-container");
 
 function createBoard(num) {
     const boardContainer = document.createElement("div");
