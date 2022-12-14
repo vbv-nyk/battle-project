@@ -27,6 +27,13 @@ function createBoard(num) {
     boardsContainer.append(boardContainer);
 }
 
+export function resetBoard() {
+    const boardItems = document.querySelectorAll(".board-item");
+    for (let boardItem of boardItems) {
+        boardItem.textContent = "";
+    }
+}
+
 let boardInit = function () {
     boardsContainer.classList.add("boards-container");
     body.append(boardsContainer);

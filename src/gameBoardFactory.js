@@ -1,4 +1,6 @@
-import { updateCurrentPlayer } from "./mainGame";
+import { resetBoard } from "./boardInit";
+import { computer, computerPlays } from "./computerBoard";
+import { gameboard1, gameboard2, resetGame } from "./init";
 import { shipFactory } from "./shipFactory";
 const axis = document.querySelector(".axis");
 export function GameBoardFactory(name) {
@@ -48,6 +50,9 @@ export function GameBoardFactory(name) {
             }
             count++;
         }
+        if (count == 6 && name == "1") {
+            gameboard2.enabled = true;
+        }
         return true;
     }
 
@@ -57,6 +62,7 @@ export function GameBoardFactory(name) {
                 return item == false;
             });
         });
+        boardInnit;
         return gameOver;
     }
 
@@ -71,9 +77,9 @@ export function GameBoardFactory(name) {
 
 
     function hitCord(x, y, dataNum) {
-        const chosenBoardItem = document.querySelector(`.board-${name}.board-item[data-num="${dataNum}"]`)
+        const chosenBoardItem = document.querySelector(`.board-${name}.board-item[data-num="${dataNum}"]`);
         if (count > 5) {
-            if (this.enabled == false) {
+            if (this.enabled === false) {
                 return false;
             }
             if (board[x][y] !== 0) {
@@ -85,8 +91,20 @@ export function GameBoardFactory(name) {
                     board[x][y] = 0;
                     chosenBoardItem.textContent = "X";
                 }
-                updateCurrentPlayer();
-                return true;
+                if (checkBoard()) {
+                    if (this.name == "1") {
+                        alert("Computer won");
+                    } else {
+                        alert("Player 1 won");
+                    }
+                    resetGame();
+                    return true;
+                }
+                if (this.name == "1") {
+                    return true;
+                } else {
+                    return computerPlays();
+                }
             } else {
                 return false;
             }
