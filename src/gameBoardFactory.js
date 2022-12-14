@@ -62,7 +62,6 @@ export function GameBoardFactory(name) {
                 return item == false;
             });
         });
-        boardInnit;
         return gameOver;
     }
 
@@ -75,6 +74,18 @@ export function GameBoardFactory(name) {
         initializeShips();
     }()
 
+    function displayWinner() {
+        if (checkBoard()) {
+            if (name == "1") {
+                alert("Computer won");
+            } else {
+                alert("Player won");
+            }
+            resetGame();
+            return true;
+        }
+        return false;
+    }
 
     function hitCord(x, y, dataNum) {
         const chosenBoardItem = document.querySelector(`.board-${name}.board-item[data-num="${dataNum}"]`);
@@ -91,15 +102,6 @@ export function GameBoardFactory(name) {
                     board[x][y] = 0;
                     chosenBoardItem.textContent = "X";
                 }
-                if (checkBoard()) {
-                    if (this.name == "1") {
-                        alert("Computer won");
-                    } else {
-                        alert("Player 1 won");
-                    }
-                    resetGame();
-                    return true;
-                }
                 if (this.name == "1") {
                     return true;
                 } else {
@@ -113,6 +115,6 @@ export function GameBoardFactory(name) {
         }
     }
 
-    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships, name, enabled, count };
+    return { boardInnit, hitCord, clearBoard, createShip, board, checkBoard, ships, name, enabled, count, displayWinner };
 
 }

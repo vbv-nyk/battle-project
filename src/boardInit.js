@@ -19,6 +19,10 @@ function createBoard(num) {
                 } else if (num === 2) {
                     gameboard2.hitCord(i, j, e.target.dataset.num);
                 }
+                if (gameboard1.checkBoard())
+                    gameboard1.displayWinner();
+                else if (gameboard2.checkBoard())
+                    gameboard2.displayWinner();
             });
             boardContainer.append(box);
             cur++;
